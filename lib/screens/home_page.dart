@@ -5,6 +5,8 @@ import '../services/user_service.dart';
 import '../widgets/bottom_navbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'shopping_list_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,6 +30,13 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
+
+      if (index == 1) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ShoppingListPage()),
+      );
+    }
 
     if (index == 2) {
       if (UserService.currentUser != null) {
