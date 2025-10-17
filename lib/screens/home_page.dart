@@ -7,7 +7,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'shopping_list_page.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -30,14 +29,12 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _currentIndex = index;
     });
-
-      if (index == 1) {
+    if (index == 1) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const ShoppingListPage()),
       );
     }
-
     if (index == 2) {
       if (UserService.currentUser != null) {
         Navigator.push(
@@ -130,31 +127,51 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 0.85,
-                ),
-                itemCount: 6,
-                itemBuilder: (context, index) {
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                        childAspectRatio: 0.85,
+                       ),
+                        itemCount: 6,
+                        itemBuilder: (context, index) {
+                          final products = [
+                            {'name': 'Produk 1', 'image': 'assets/images/produk1.jpeg'},
+                            {'name': 'Produk 2', 'image': 'assets/images/produk2.jpeg'},
+                            {'name': 'Produk 3', 'image': 'assets/images/produk3.jpeg'},
+                            {'name': 'Produk 4', 'image': 'assets/images/produk4.jpeg'},
+                            {'name': 'Produk 5', 'image': 'assets/images/produk5.jpeg'},
+                            {'name': 'Produk 6', 'image': 'assets/images/produk6.jpeg'},
+                          ];
                   return Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.eco, size: 40, color: Colors.grey[600]),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Produk ${index + 1}',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey[800],
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                            child: Image.asset(
+                              products[index]['image']!,
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            products[index]['name']!,
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey[800],
+                              fontWeight: FontWeight.w500,
+                          ),
                           ),
                         ),
                       ],
